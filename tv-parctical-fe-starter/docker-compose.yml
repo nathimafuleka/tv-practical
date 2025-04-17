@@ -14,7 +14,7 @@ services:
       context: ./fibertime_fe
       dockerfile: ./Dockerfile.dev
     volumes:
-      - ./fibertime_fe:/app:ro
+      - ./fibertime_fe:/app
       - ./fibertime_fe/package-lock.json:/app/package-lock.json
       - fe-next:/app/.next
       - fe-modules:/app/node_modules
