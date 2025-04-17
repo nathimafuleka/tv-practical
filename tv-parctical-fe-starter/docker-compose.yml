@@ -25,10 +25,6 @@ services:
     build:
       context: ./fibertime_be
       dockerfile: ./Dockerfile
-    volumes:
-      - ./fibertime_be:/app
-      - be-modules:/app/node_modules
-    entrypoint: 'npm i && node /app/app/main.js'
     networks:
       - fibertime-net
 

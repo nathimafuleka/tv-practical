@@ -2,4 +2,8 @@ FROM node:20-alpine3.20
 
 WORKDIR /app
 
-ENTRYPOINT npm i && node /app/main.js
+copy . .
+
+run npm i
+
+CMD node /app/dist/main.js
