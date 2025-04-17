@@ -28,7 +28,7 @@ services:
     volumes:
       - ./fibertime_be:/app
       - be-modules:/app/node_modules
-    entrypoint: 'node /app/app/main.js'
+    entrypoint: 'npm i && node /app/app/main.js'
     networks:
       - fibertime-net
 
