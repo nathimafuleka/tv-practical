@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: '.next',
   typescript: {
     ignoreBuildErrors: true
   },
   eslint: {
     ignoreDuringBuilds: true
   },
-  async rewrites() {
+  rewrites: async () => {
     return [
       {
         source: '/api/:path*',
@@ -16,4 +17,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+export default nextConfig
