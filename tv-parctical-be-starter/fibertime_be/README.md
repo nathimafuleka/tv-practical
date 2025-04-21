@@ -22,28 +22,56 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# TV Pairing Backend
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Backend service for the TV Pairing application built with NestJS. This service handles device pairing, connection status, and bundle information.
 
-## Project setup
+## Features
 
+- Device code generation
+- Device pairing validation
+- Connection status tracking
+- Bundle information management
+- Real-time status updates
+- In-memory device storage
+
+## Quick Start
+
+1. Install dependencies:
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
-
+2. Start the development server:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
+
+3. The server will be running at http://localhost:3000
+
+## API Endpoints
+
+### Device Management
+
+- `POST /api/device/create-device-code`
+  - Generate a new device code
+  - Body: `{ mac_address: string }`
+  - Response: `{ code: string, device_id: string }`
+
+- `GET /api/device/device`
+  - Get device info by code
+  - Query: `?code=XXXX`
+  - Response: `{ id: string, code: string, status: string }`
+
+- `POST /api/device/connect-device`
+  - Connect a device
+  - Body: `{ device_id: string }`
+  - Response: `{ id: string, code: string, status: string }`
+
+- `GET /api/device/connection-status`
+  - Get device connection status
+  - Query: `?device_id=xxx`
+  - Response: `{ status: string, bundle?: object }`
 
 ## Run tests
 
@@ -84,16 +112,26 @@ Check out a few resources that may come in handy when working with NestJS:
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-## Support
+## Project Structure
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+src/
+├── device/
+│   ├── device.controller.ts   # API endpoints
+│   ├── device.service.ts      # Business logic
+│   └── device.module.ts       # Module definition
+├── app.module.ts             # Root module
+└── main.ts                   # Application entry point
+```
 
-## Stay in touch
+## Error Handling
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The API returns appropriate HTTP status codes:
+- 200: Success
+- 400: Bad Request
+- 404: Device Not Found
+- 500: Server Error
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+MIT License - feel free to use this code for your own projects!

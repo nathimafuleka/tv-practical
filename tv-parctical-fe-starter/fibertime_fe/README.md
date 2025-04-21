@@ -20,7 +20,7 @@ A modern TV pairing application built with Next.js 13+ and Chakra UI. This app d
 1. Clone the repository:
 ```bash
 git clone https://github.com/nathimafuleka/tv-practical.git
-cd tv-practical/tv-parctical-fe-starter/fibertime_fe
+cd fibertime_fe
 ```
 
 2. Install dependencies:
@@ -38,8 +38,8 @@ yarn dev
 ```
 
 4. Open your browser:
-- TV Screen: [http://localhost:3000/tv](http://localhost:3000/tv)
-- Mobile App: [http://localhost:3000/mobile](http://localhost:3000/mobile)
+- TV Screen: [http://127.0.0.1:60402/tv](http://127.0.0.1:60402/tv)
+- Mobile App: [http://127.0.0.1:60402/mobile](http://127.0.0.1:60402/mobile)
 
 ## 🎮 How to Use
 
