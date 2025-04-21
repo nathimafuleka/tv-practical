@@ -67,6 +67,11 @@ export const authApi = {
     await api.post('/api/auth/request-otp', { cell_number: phoneNumber });
   },
 
+  getCurrentOtp: async (): Promise<{ phone: string; otp: string } | null> => {
+    const response = await api.get('/api/auth/current-otp');
+    return response.data;
+  },
+
   login: async (phoneNumber: string, otp: string): Promise<AuthResponse> => {
     const response = await api.post('/api/auth/login', { cell_number: phoneNumber, otp });
     return response.data;

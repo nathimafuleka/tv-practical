@@ -3,6 +3,7 @@ import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/
 @Injectable()
 export class AuthService {
   private otps: Map<string, string> = new Map();
+  private lastOtpInfo: { phone: string; otp: string } | null = null;
 
   private validateSAPhoneNumber(phone: string): boolean {
     // South African phone number format: +27 XX XXX XXXX or 0XX XXX XXXX
@@ -29,6 +30,13 @@ export class AuthService {
 
     // In a real app, you'd send this via SMS
     console.log(`OTP for ${cleanNumber}: ${otp}`);
+    
+    // Store the last OTP info
+    this.lastOtpInfo = { phone: cleanNumber, otp };
+  }
+
+  async getCurrentOtp(): Promise<{ phone: string; otp: string } | null> {
+    return this.lastOtpInfo;
   }
 
   async login(cell_number: string, otp: string): Promise<{ token: string; user: { id: string; cell_number: string; name: string } }> {

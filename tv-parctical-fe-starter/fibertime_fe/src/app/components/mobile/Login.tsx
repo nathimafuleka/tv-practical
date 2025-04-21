@@ -21,6 +21,7 @@ import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { FiArrowRight } from 'react-icons/fi';
 import { MdOutlinePhoneAndroid } from 'react-icons/md';
+import Link from 'next/link';
 
 interface LoginProps {
   onSuccess: () => void;
@@ -152,6 +153,13 @@ export default function Login({ onSuccess }: LoginProps) {
   return (
     <Container maxW="container.sm" py={8}>
       <VStack spacing={8} align="stretch">
+        <Box textAlign="right">
+          <Link href="/otp-view" style={{ textDecoration: 'none' }}>
+            <Text color="blue.500" fontWeight="medium" _hover={{ textDecoration: 'underline' }}>
+              View Current OTP
+            </Text>
+          </Link>
+        </Box>
         <VStack spacing={4} align="center">
           <Icon as={MdOutlinePhoneAndroid} w={12} h={12} color="blue.500" />
           <Heading size="lg" textAlign="center">

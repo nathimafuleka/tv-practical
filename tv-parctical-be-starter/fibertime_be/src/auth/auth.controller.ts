@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -8,6 +8,11 @@ export class AuthController {
   @Post('request-otp')
   async requestOtp(@Body() body: { cell_number: string }): Promise<void> {
     return this.authService.requestOtp(body.cell_number);
+  }
+
+  @Get('current-otp')
+  async getCurrentOtp() {
+    return this.authService.getCurrentOtp();
   }
 
   @Post('login')
