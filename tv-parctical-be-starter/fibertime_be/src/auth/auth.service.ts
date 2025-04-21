@@ -1,18 +1,9 @@
 import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
-import * as twilio from 'twilio';
-import { twilioConfig } from '../config/twilio.config';
 
 @Injectable()
 export class AuthService {
-  private twilioClient: twilio.Twilio | null = null;
-
-  constructor() {
-    // Only initialize Twilio in production
-    if (process.env.NODE_ENV === 'production') {
-      this.twilioClient = twilio(twilioConfig.accountSid, twilioConfig.authToken);
-    }
-  }
   private otps: Map<string, string> = new Map();
+  private lastOtpInfo: { phone: string; otp: string } | null = null;
 
   private validateSAPhoneNumber(phone: string): boolean {
     // South African phone number format: +27 XX XXX XXXX or 0XX XXX XXXX
@@ -37,22 +28,15 @@ export class AuthService {
     const otp = this.generateOTP();
     this.otps.set(cleanNumber, otp);
 
-    if (process.env.NODE_ENV === 'production' && this.twilioClient) {
-      // Send OTP via Twilio SMS in production
-      try {
-        await this.twilioClient.messages.create({
-          body: `Your TV Pairing verification code is: ${otp}`,
-          to: cleanNumber,
-          from: twilioConfig.fromNumber,
-        });
-      } catch (error) {
-        console.error('Failed to send SMS:', error);
-        throw new BadRequestException('Failed to send verification code');
-      }
-    } else {
-      // In development, just log the OTP to console
-      console.log(`[DEV MODE] OTP for ${cleanNumber}: ${otp}`);
-    }
+    // In a real app, you'd send this via SMS
+    console.log(`OTP for ${cleanNumber}: ${otp}`);
+    
+    // Store the last OTP info
+    this.lastOtpInfo = { phone: cleanNumber, otp };
+  }
+
+  async getCurrentOtp(): Promise<{ phone: string; otp: string } | null> {
+    return this.lastOtpInfo;
   }
 
   async login(cell_number: string, otp: string): Promise<{ token: string; user: { id: string; cell_number: string; name: string } }> {
