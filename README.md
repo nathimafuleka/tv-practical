@@ -213,8 +213,7 @@ The app includes comprehensive error handling:
 
 ## 📱 Live Demo
 
-Visit the live demo: [Your Vercel/Netlify URL]
-
+Visit the live demo: https://tv-practical-lgql.vercel.app/mobile and https://tv-practical-lgql.vercel.app/tv
 ## 🎥 Demo Video
 
 Watch the walkthrough: [Your Loom Video URL]
