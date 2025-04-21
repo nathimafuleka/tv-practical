@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import {
   Box,
   VStack,
@@ -9,7 +9,6 @@ import {
   Container,
   Heading,
   useColorModeValue,
-  HStack,
   Badge,
   Link,
 } from '@chakra-ui/react';
@@ -42,50 +41,45 @@ export default function TVScreen() {
     'linear(to-br, blue.800, purple.800)'
   );
 
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-
-    // This checks if someone connected with the code
-    const checkDeviceStatus = async () => {
-      try {
-        // No code? Make one
-        if (!pairingCode) {
-          const newCode = await deviceApi.createDeviceCode('tv_1');
-          dispatch(setPairingCode(newCode.code));
-          return;
-        }
-
-        // See if anyone used our code
-        const device = await deviceApi.getDevice(pairingCode);
-
-        // Check if they're still connected
-        const status = await deviceApi.getConnectionStatus(device.id);
-
-        // TODO: Maybe add offline detection?
-        dispatch(setDevice(device));
-        dispatch(setConnectionStatus(status));
-
-        // For debugging
-        if (status.status === 'connected') {
-          console.log('🎉 Someone connected!');
-        }
-      } catch (error) {
-        console.error('Failed to check device status:', error);
+  // This checks if someone connected with the code
+  const checkDeviceStatus = useCallback(async () => {
+    try {
+      // No code? Make one
+      if (!pairingCode) {
+        const newCode = await deviceApi.createDeviceCode('tv_1');
+        dispatch(setPairingCode(newCode.code));
+        return;
       }
-    };
 
+      // See if anyone used our code
+      const device = await deviceApi.getDevice(pairingCode);
+
+      // Check if they're still connected
+      const status = await deviceApi.getConnectionStatus(device.id);
+
+      // TODO: Maybe add offline detection?
+      dispatch(setDevice(device));
+      dispatch(setConnectionStatus(status));
+
+      // For debugging
+      if (status.status === 'connected') {
+        console.log('🎉 Someone connected!');
+      }
+    } catch (error) {
+      console.error('Failed to check device status:', error);
+    }
+  }, [dispatch, pairingCode]);
+
+  useEffect(() => {
     // Check immediately
     checkDeviceStatus();
     
-    // Then poll every 5 seconds
-    intervalId = setInterval(checkDeviceStatus, 5000);
+    // Start polling
+    const intervalId = setInterval(checkDeviceStatus, 5000);
 
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [pairingCode]);
+    // Cleanup on unmount
+    return () => clearInterval(intervalId);
+  }, [pairingCode, dispatch, checkDeviceStatus]);
 
   return (
     <Box

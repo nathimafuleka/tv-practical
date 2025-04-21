@@ -11,7 +11,6 @@ import {
   Heading,
   useColorModeValue,
   Icon,
-  Flex,
 } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/toast';
 import { PinInput, PinInputField } from '@chakra-ui/pin-input';
@@ -75,14 +74,12 @@ export default function PairingCode({ onSuccess }: PairingCodeProps) {
       });
 
       onSuccess();
-    } catch (err: any) {
+    } catch (err) {
       // Something went wrong
       let message = 'Wrong code? Try again!';
       
-      if (err.response?.status === 404) {
-        message = 'Hmm... that code does not look right';
-      } else if (err.response?.data?.message) {
-        message = err.response.data.message;
+      if (err instanceof Error) {
+        message = err.message;
       }
       
       toast({

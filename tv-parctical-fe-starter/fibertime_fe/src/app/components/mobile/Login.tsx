@@ -7,12 +7,10 @@ import {
   Button,
   Text,
   HStack,
-  Image,
   Container,
   Heading,
   useColorModeValue,
   Icon,
-  Flex,
 } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/toast';
 import { PinInput, PinInputField } from '@chakra-ui/pin-input';
@@ -86,13 +84,13 @@ export default function Login({ onSuccess }: LoginProps) {
         status: 'success',
         duration: 5000,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('OTP request error:', error);
-      console.error('Error response:', error.response?.data);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send verification code';
       
       toast({
         title: 'Error',
-        description: error.response?.data?.message || 'Failed to send verification code',
+        description: errorMessage,
         status: 'error',
       });
     } finally {
