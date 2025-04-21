@@ -216,7 +216,7 @@ The app includes comprehensive error handling:
 Visit the live demo: https://tv-practical-lgql.vercel.app/mobile and https://tv-practical-lgql.vercel.app/tv
 ## 🎥 Demo Video
 
-Watch the walkthrough: [Your Loom Video URL]
+Watch the walkthrough: https://youtu.be/jMbmc0oS1cw
 
 ## 📝 License
 
