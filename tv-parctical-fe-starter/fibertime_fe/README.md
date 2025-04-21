@@ -6,6 +6,60 @@ A modern TV pairing application built with Next.js 13+ and Chakra UI. This app d
 
 - **TV Screen**: Displays pairing code and real-time connection status
 - **Mobile Flow**: Step-by-step pairing process
+  - Login screen with OTP authentication
+  - Dedicated OTP viewing page for development
+  - Code entry with validation
+  - Connection status
+  - Bundle information display
+- **Real-time Updates**: Live connection status with polling
+- **Developer Tools**: 
+  - OTP viewing page for easy testing
+  - Backend console logging
+  - Real-time OTP status updates
+- **Error Handling**: Comprehensive error states and user feedback
+- **Responsive Design**: Works on all screen sizes
+- **Modern UI**: Clean interface with smooth animations
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+```bash
+git clone https://github.com/nathimafuleka/tv-practical.git
+```
+
+2. Start the backend:
+```bash
+cd tv-parctical-be-starter/fibertime_be
+npm install
+npm run start:dev
+```
+
+3. Start the frontend:
+```bash
+cd tv-parctical-fe-starter/fibertime_fe
+npm install
+npm run dev
+```
+
+4. Access the application:
+- Open http://localhost:3000 for the main application
+- Visit http://localhost:3000/otp-view to see current OTP (development only)
+
+## 💻 Development Features
+
+### OTP Viewing
+- Click "View Current OTP" on the login page
+- See both phone number and OTP in a dedicated view
+- Auto-refreshes every 2 seconds
+- Manual refresh button available
+- OTP is also logged in the backend console
+
+A modern TV pairing application built with Next.js 13+ and Chakra UI. This app demonstrates a real-world TV-mobile device pairing flow with live status updates.
+
+## 🌟 Features
+
+- **TV Screen**: Displays pairing code and real-time connection status
+- **Mobile Flow**: Step-by-step pairing process
   - Login screen
   - Code entry with validation
   - Connection status
@@ -20,7 +74,7 @@ A modern TV pairing application built with Next.js 13+ and Chakra UI. This app d
 1. Clone the repository:
 ```bash
 git clone https://github.com/nathimafuleka/tv-practical.git
-cd fibertime_fe
+cd tv-practical/tv-parctical-fe-starter/fibertime_fe
 ```
 
 2. Install dependencies:
@@ -38,8 +92,8 @@ yarn dev
 ```
 
 4. Open your browser:
-- TV Screen: [http://127.0.0.1:60402/tv](http://127.0.0.1:60402/tv)
-- Mobile App: [http://127.0.0.1:60402/mobile](http://127.0.0.1:60402/mobile)
+- TV Screen: [http://localhost:3000/tv](http://localhost:3000/tv)
+- Mobile App: [http://localhost:3000/mobile](http://localhost:3000/mobile)
 
 ## 🎮 How to Use
 
@@ -159,11 +213,10 @@ The app includes comprehensive error handling:
 
 ## 📱 Live Demo
 
-Visit the live demo: [Your Vercel/Netlify URL]
-
+Visit the live demo: https://tv-practical-lgql.vercel.app/mobile and https://tv-practical-lgql.vercel.app/tv
 ## 🎥 Demo Video
 
-Watch the walkthrough: [Your Loom Video URL]
+Watch the walkthrough: https://youtu.be/jMbmc0oS1cw
 
 ## 📝 License
 
